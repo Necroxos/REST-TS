@@ -38,6 +38,7 @@ app.get('/usuario', function(req, res) {
         })
 });
 
+
 app.post('/usuario', function(req, res) {
     let body = req.body;
 
