@@ -12,10 +12,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
-    res.json('Hello World')
+    res.json('REST API Online')
 });
 
-app.use(require('./routes/usuario'));
+// Configuración global de rutas
+app.use(require('./routes/routes'));
 
 mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
     (err, res) => {
