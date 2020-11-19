@@ -69,7 +69,7 @@ app.put('/usuario/:id', [verificaToken, verificaAdminRole], function(req, res) {
 
     Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, usuarioDB) => {
         if (err) {
-            return res.status(400).json({
+            return res.status(500).json({
                 ok: false,
                 err
             });
@@ -98,7 +98,7 @@ app.delete('/soft-delete/:id', [verificaToken, verificaAdminRole], function(req,
 
     Usuario.findByIdAndUpdate(id, cambiarEstado, { new: true }, (err, usuarioEliminado) => {
         if (err) {
-            return res.status(400).json({
+            return res.status(500).json({
                 ok: false,
                 err
             });
@@ -123,7 +123,7 @@ app.delete('/usuario/:id', [verificaToken, verificaAdminRole], function(req, res
 
     Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => {
         if (err) {
-            return res.status(400).json({
+            return res.status(500).json({
                 ok: false,
                 err
             });

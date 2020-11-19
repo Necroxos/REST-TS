@@ -7,7 +7,7 @@
         "node": "12.19.0"
     },
     "scripts": {
-        "start": "node server/server",
+        "start": "nodemon server/server",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
