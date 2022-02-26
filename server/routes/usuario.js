@@ -8,7 +8,7 @@ const Usuario = require('../models/usuario');
 const { verificaToken, verificaAdminRole } = require('../middlewares/autenticacion');
 
 
-app.get('/usuario', verificaToken, (req, res) => {
+app.get('/usuarios', verificaToken, (req, res) => {
 
     let desde = req.query.desde || 0;
     desde = Number(desde);

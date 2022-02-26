@@ -1,0 +1,34 @@
+version: '3'
+services:
+  db:
+    image: mongo
+    container_name: Mongo-DB
+    restart: always
+    volumes:
+      - mongo_config:/data/configdb
+      - mongo_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=cafe
+      - MONGO_INITDB_ROOT_USERNAME=
+      - MONGO_INITDB_ROOT_PASSWORD=
+    ports:
+      - "27017:27017"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: api
+    container_name: REST-API
+    volumes:
+      - api:/usr/src/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    command: ["npm", "start"]
+
+volumes:
+  mongo_data:
+  mongo_config:
+  api:

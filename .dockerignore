@@ -1,0 +1,6 @@
+.git/
+.gitignore
+node_modules/
+*.xls*
+docker-compose.yml
+*.md
