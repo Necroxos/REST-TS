@@ -76,7 +76,7 @@ describe('ProductService', () => {
             expect(generateQueryProductPaginationSpy).toHaveBeenCalled();
             expect(checkPalindromeSpy).toHaveBeenCalled();
             expect(applyDiscountProductSpy).not.toHaveBeenCalled();
-            expect(result).not.toEqual(MOCK_PRODUCT_PAGINATION_RESPONSE);
+            expect(result).toEqual(MOCK_PRODUCT_PAGINATION_RESPONSE);
         });
 
         it('should return object as PaginationModel with out search and normal price for products', async () => {
