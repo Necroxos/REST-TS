@@ -1,34 +1,43 @@
-version: '3'
+version: '3.8'
 services:
-  db:
+# MONGO DB
+  database:
     image: mongo
-    container_name: Mongo-DB
+    container_name: mongodb_local
     restart: always
-    volumes:
-      - mongo_config:/data/configdb
-      - mongo_data:/data/db
     environment:
-      - MONGO_INITDB_DATABASE=cafe
-      - MONGO_INITDB_ROOT_USERNAME=
-      - MONGO_INITDB_ROOT_PASSWORD=
+      - MONGO_INITDB_ROOT_USERNAME=productListUser
+      - MONGO_INITDB_ROOT_PASSWORD=productListPassword
     ports:
       - "27017:27017"
 
-  api:
+# SEED
+  database_seed:
+    image: seed
+    container_name: mongodb_seed
     build:
-      context: .
+      context: ./database
+    links:
+      - database
+
+# BACKEND - API
+  backend:
+    build:
+      context: ./backend
       dockerfile: Dockerfile
     image: api
-    container_name: REST-API
-    volumes:
-      - api:/usr/src/app
+    container_name: rest_backend
+    restart: always
     ports:
-      - "5000:5000"
+      - "3001:3001"
+    links:
+      - database
     depends_on:
-      - db
+      - database
+    environment:
+      - NODE_ENV=development
+      - DB_URI=mongodb://database/promotions
+      - DB_USER=productListUser
+      - DB_PASS=productListPassword
+      - PORT=3001
     command: ["npm", "start"]
-
-volumes:
-  mongo_data:
-  mongo_config:
-  api:

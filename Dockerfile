@@ -1,4 +1,4 @@
-FROM node:16.13.2 AS cevin-api
+FROM node:16.13.2 AS REST-TS
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
